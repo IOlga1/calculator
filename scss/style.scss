@@ -1,0 +1,283 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+
+
+// Reset Styles
+// html{
+//     font-size: 100%;
+// }
+body {
+    margin: 0;
+    padding: 0;
+    // box-sizing: border-box;
+    background-color: #c9e5e6;
+
+    // a{
+    //     text-decoration: none;
+    // }
+    // :focus,:active{outline: none;}
+    // a:focus,a:active{outline: none;}
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+}
+
+.calcWrap {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 370px;
+    height: 100%;
+    margin: auto;
+
+    .specialShadowBlock {
+        position: absolute;
+        margin-top: 30px;
+        height: 55px;
+        width: 94%;
+        box-shadow: 0px 20px 12px 6px rgba(34, 60, 80, 0.2);
+    }
+
+    .plateWrap {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        box-sizing: border-box;
+        margin-top: 30px;
+        margin-top: 20px;
+        width: 95%;
+        height: 100px;
+        background-color: rgb(248, 245, 245);
+        z-index: 3;
+        border-radius: 2px;
+        border: 1px solid rgba(223, 223, 223, 0.884);
+        box-shadow: 0px 12px 4px -5px #f34e53;
+
+        .titleArea {
+            width: 100%;
+            height: 20px;
+            background-color: #f1f1f1;
+            text-align: center;
+            font-family: 'Roboto', sans-serif;
+            color: rgba(255, 0, 0, 0.707);
+        //     letter-spacing: 15px;
+            font-size: 12px;
+            line-height: 19px;
+
+        }
+
+        .forMPlus {
+            color: rgb(121, 121, 121);
+            position: absolute;
+            right: 2px;
+            top: 3px;
+            text-align: right;
+            font-size: 10px;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 600;
+        }
+
+        .topNumberArea{
+            display: block;
+            text-align: right;
+            width: 87%;
+            height: 20px;
+            margin: 5px auto 0 auto;
+            font-family: 'Roboto', sans-serif;
+            font-size: 16px;
+            color: rgba(32, 32, 32, 0.76);
+            overflow: hidden;
+        }
+
+        .calcFinish {
+            display: block;
+            margin: 0 auto 15px auto;
+            background-color: rgba(255, 255, 0, 0);
+            width: 88%;
+            height: 42%;
+            text-align: right;
+            font-size: 50px;
+            font-family: 'Roboto', sans-serif;
+            color: rgba(32, 32, 32, 0.76);
+            font-weight: 400;
+            // border: 1px solid red;
+        }
+    }
+
+
+
+    // BUTTONS AREA
+
+    .buttonsWrap {
+        position: relative;
+        z-index: 2;
+        border-radius: 3px;
+        width: 100%;
+        margin-top: -32px;
+        margin-bottom: 30px;
+        background-color: #ff6567;
+        box-shadow: 0px 22px 21px 5px rgba(34, 60, 80, 0.2);
+        border: 1px solid #f75b5e;
+        display: grid;
+        row-gap: 9px;
+        column-gap: 19px;
+        grid-template-columns: 4, 1fr;
+        grid-template-rows: 6, 1fr;
+        justify-content: center;
+        align-content: center;
+        padding-top: 55px;
+        padding-bottom: 25px;
+        user-select: none;
+    }
+
+    .calcButLight,
+    .calcButDark,
+    .calcButYell {
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+        font-size: 22px;
+        cursor: pointer;
+    }
+
+    .calcButLight,
+    .calcButDark {
+        height: 57px;
+        width: 57px;
+        border-radius: 50px;
+    }
+
+    .calcButDark {
+        background-color: #ff4447;
+        border: 1px solid #f34e53;
+        transition: 150ms;
+        &:active {
+            box-shadow: inset 0px 3px 11px 5px #ee3f42;
+            font-size: 21.5px;
+        }
+    }
+
+    .calcButLight {
+        border: 1px solid #ff8385;
+        transition: 150ms;
+        &:active {
+            box-shadow: inset 0px 3px 11px 5px #f75656;
+            font-size: 21.5px;
+        }
+    }
+
+    .calcButYell {
+        background-color: rgb(255, 255, 0);
+        border: 1px solid rgb(255, 255, 0);
+        border-radius: 50px;
+        transition: 150ms;
+        &:active {
+            box-shadow: inset 0px 3px 11px 5px rgb(255, 196, 0);
+            font-size: 21.5px;
+        }
+    }
+
+    // GRID DIVS
+    .but_memory_minus {
+        grid-row: 1;
+        grid-column: 1;
+    }
+    .but_memory_plus {
+        grid-row: 1;
+        grid-column: 2;
+    }
+    .but_memory {
+        grid-row: 1;
+        grid-column: 3;
+    }
+    .but_ax {
+        grid-row: 1;
+        grid-column: 4;
+    }
+
+    .but_backspace {
+        grid-row: 2;
+        grid-column: 1;
+    }
+    .but_plus_minus {
+        grid-row: 2;
+        grid-column: 2;
+    }
+    .but_proc {
+        grid-row: 2;
+        grid-column: 3;
+    }
+    .but_umn {
+        grid-row: 2;
+        grid-column: 4;
+    }
+
+    .but_minus {
+        grid-row: 3;
+        grid-column: 4;
+    }
+    .but_plus {
+        grid-row: 4;
+        grid-column: 4;
+    }
+    .but_equal {
+        grid-row: 5 / 7;
+        grid-column: 4;
+    }
+    .but_dot {
+        grid-row: 6;
+        grid-column: 3;
+    }
+
+    .but_delete {
+        grid-row: 6;
+        grid-column: 2;
+    }
+    .but_0 {
+        grid-row: 6;
+        grid-column: 1;
+    }
+    .but_1 {
+        grid-row: 5;
+        grid-column: 1;
+    }
+    .but_2 {
+        grid-row: 5;
+        grid-column: 2;
+    }
+
+    .but_3 {
+        grid-row: 5;
+        grid-column: 3;
+    }
+    .but_4 {
+        grid-row: 4;
+        grid-column: 1;
+    }
+    .but_5 {
+        grid-row: 4;
+        grid-column: 2;
+    }
+    .but_6 {
+        grid-row: 4;
+        grid-column: 3;
+    }
+
+    .but_7 {
+        grid-row: 3;
+        grid-column: 1;
+    }
+    .but_8 {
+        grid-row: 3;
+        grid-column: 2;
+    }
+    .but_9 {
+        grid-row: 3;
+        grid-column: 3;
+    }
+}
