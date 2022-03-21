@@ -9,82 +9,18 @@ document.querySelector('.calcFinish').innerHTML = equal;
 document.querySelector('.topNumberArea').innerHTML = '0';
 
 
+function writeNumberPos() {
+    butNumPos = document.querySelectorAll('.butNumPos');
+    console.log(butNumPos);
 
-// class Numbers {
-
-//     constructor(name, age) {
-//         this.name = name;
-//         this.age = age;
-//     }
-
-//     eats(count) {
-//         return console.log(`${this.name} поел ${count} грамм еды`)
-//     }
-// }
-
-
-
-
-function writeNumber1() {
-    newChar = '1';
-    // newChar = document.querySelector('.one');
-    addNumberAndShow();
+    butNumPos.forEach(element => {
+        element.addEventListener('click', () => {
+            newChar = element.textContent;
+            addNumberAndShow();
+        })
+    });
 }
-document.querySelector('.but_1').onclick = writeNumber1;
-
-function writeNumber2() {
-    newChar = '2';
-    addNumberAndShow();
-}
-document.querySelector('.but_2').onclick = writeNumber2;
-
-function writeNumber3() {
-    newChar = '3';
-    addNumberAndShow();
-}
-document.querySelector('.but_3').onclick = writeNumber3;
-
-function writeNumber4() {
-    newChar = '4';
-    addNumberAndShow();
-}
-document.querySelector('.but_4').onclick = writeNumber4;
-
-function writeNumber5() {
-    newChar = '5';
-    addNumberAndShow();
-}
-document.querySelector('.but_5').onclick = writeNumber5;
-
-function writeNumber6() {
-    newChar = '6';
-    addNumberAndShow();
-}
-document.querySelector('.but_6').onclick = writeNumber6;
-
-function writeNumber7() {
-    newChar = '7';
-    addNumberAndShow();
-}
-document.querySelector('.but_7').onclick = writeNumber7;
-
-function writeNumber8() {
-    newChar = '8';
-    addNumberAndShow();
-}
-document.querySelector('.but_8').onclick = writeNumber8;
-
-function writeNumber9() {
-    newChar = '9';
-    addNumberAndShow();
-}
-document.querySelector('.but_9').onclick = writeNumber9;
-
-function writeNumber0() {
-    newChar = '0';
-    addNumberAndShow();
-}
-document.querySelector('.but_0').onclick = writeNumber0;
+writeNumberPos();
 
 // '('
 function writeScobLeft() {
