@@ -10,7 +10,7 @@ document.querySelector('.topNumberArea').innerHTML = '0';
 
 
 function writeNumberPos() {
-    butNumPos = document.querySelectorAll('.butNumPos');
+    butNumPos = document.querySelectorAll('.butNum');
     console.log(butNumPos);
 
     butNumPos.forEach(element => {
