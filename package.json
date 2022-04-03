@@ -1,0 +1,19 @@
+{
+  "name": "p3_calculator",
+  "version": "1.0.0",
+  "description": "[Click here](https://iolga1.github.io/calculator/)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IOlga1/calculator.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IOlga1/calculator/issues"
+  },
+  "homepage": "https://github.com/IOlga1/calculator#readme"
+}
