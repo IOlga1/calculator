@@ -14,7 +14,7 @@ const writeEqual = function () {
         checkLastSign();
         calcStr = calcArr.join('');
         try {
-            if (calcArr.length == 0) {
+            if (calcArr.length === 0) {
                 equal = '0';
             }
             else {
@@ -30,10 +30,14 @@ const writeEqual = function () {
 // '+'
 const writeNumberPlus = function () {
     newChar = '+';
-    if (calcArr.length == 0 || calcArr[calcArr.length - 1] == '(') {
-        return calcStr;
+    if (calcArr.length === 0 || calcArr[calcArr.length - 1] === '(') {
+        return;
     }
-    else if (calcArr[calcArr.length - 1] == '-' || calcArr[calcArr.length - 1] == '+' || calcArr[calcArr.length - 1] == '*' || calcArr[calcArr.length - 1] == '/' || calcArr[calcArr.length - 1] == '.') {
+    else if (calcArr[calcArr.length - 1] === '-' ||
+        calcArr[calcArr.length - 1] === '+' ||
+        calcArr[calcArr.length - 1] === '*' ||
+        calcArr[calcArr.length - 1] === '/' ||
+        calcArr[calcArr.length - 1] === '.') {
         calcArr.pop();
         addNumberAndShow();
     }
@@ -44,7 +48,11 @@ const writeNumberPlus = function () {
 // '-'
 const writeNumberMinus = function () {
     newChar = '-';
-    if (calcArr[calcArr.length - 1] == '-' || calcArr[calcArr.length - 1] == '+' || calcArr[calcArr.length - 1] == '*' || calcArr[calcArr.length - 1] == '/' || calcArr[calcArr.length - 1] == '.') {
+    if (calcArr[calcArr.length - 1] === '-' ||
+        calcArr[calcArr.length - 1] === '+' ||
+        calcArr[calcArr.length - 1] === '*' ||
+        calcArr[calcArr.length - 1] === '/' ||
+        calcArr[calcArr.length - 1] === '.') {
         calcArr.pop();
         addNumberAndShow();
     }
@@ -56,9 +64,13 @@ const writeNumberMinus = function () {
 const writeNumberUmn = function () {
     newChar = '*';
     if (calcArr.length == 0 || calcArr[calcArr.length - 1] == '(') {
-        return calcStr;
+        return;
     }
-    else if (calcArr[calcArr.length - 1] == '-' || calcArr[calcArr.length - 1] == '+' || calcArr[calcArr.length - 1] == '*' || calcArr[calcArr.length - 1] == '/' || calcArr[calcArr.length - 1] == '.') {
+    else if (calcArr[calcArr.length - 1] === '-' ||
+        calcArr[calcArr.length - 1] === '+' ||
+        calcArr[calcArr.length - 1] === '*' ||
+        calcArr[calcArr.length - 1] === '/' ||
+        calcArr[calcArr.length - 1] === '.') {
         calcArr.pop();
         addNumberAndShow();
     }
@@ -70,9 +82,13 @@ const writeNumberUmn = function () {
 const writeNumberAx = function () {
     newChar = '/';
     if (calcArr.length == 0 || calcArr[calcArr.length - 1] == '(') {
-        return calcStr;
+        return;
     }
-    else if (calcArr[calcArr.length - 1] == '-' || calcArr[calcArr.length - 1] == '+' || calcArr[calcArr.length - 1] == '*' || calcArr[calcArr.length - 1] == '/' || calcArr[calcArr.length - 1] == '.') {
+    else if (calcArr[calcArr.length - 1] === '-' ||
+        calcArr[calcArr.length - 1] === '+' ||
+        calcArr[calcArr.length - 1] === '*' ||
+        calcArr[calcArr.length - 1] === '/' ||
+        calcArr[calcArr.length - 1] === '.') {
         calcArr.pop();
         addNumberAndShow();
     }
@@ -86,7 +102,7 @@ const calcBackspace = function () {
     calcStr = calcArr.join('');
     document.querySelector('.topNumberArea').innerHTML = calcStr;
     changeFontSizeTopNumberPlate();
-    if (calcArr.length == 0) {
+    if (calcArr.length === 0) {
         document.querySelector('.topNumberArea').innerHTML = '0';
     }
     changeFontSizeTopNumberPlate();
@@ -107,7 +123,7 @@ const memoryMinus = function () {
 // 'M+'
 const memoryPlus = function () {
     memoryPlusArr = equal.split('');
-    if (equal.length == 0) {
+    if (equal.length === 0) {
         document.querySelector('.titleArea').innerHTML = 'ПРИСВОЙТЕ ЗНАЧЕНИЕ';
         cleanTitleArea();
     }
@@ -126,8 +142,8 @@ const memoryExtract = function () {
 // '.'
 const writeNumberDot = function () {
     newChar = '.';
-    if (calcArr.length == 0) {
-        return calcStr;
+    if (calcArr.length === 0) {
+        return;
     }
     else if (calcArr.includes('.')) {
         checkDotsAndOperands();
@@ -139,8 +155,11 @@ const writeNumberDot = function () {
 // '('
 const writeScobLeft = function () {
     newChar = '(';
-    if (calcArr.length != 0) {
-        if (calcArr[calcArr.length - 1] != '+' && calcArr[calcArr.length - 1] != '-' && calcArr[calcArr.length - 1] != '*' && calcArr[calcArr.length - 1] != '/') {
+    if (calcArr.length !== 0) {
+        if (calcArr[calcArr.length - 1] !== '+' &&
+            calcArr[calcArr.length - 1] !== '-' &&
+            calcArr[calcArr.length - 1] !== '*' &&
+            calcArr[calcArr.length - 1] !== '/') {
             calcArr.push('*');
             addNumberAndShow();
         }
@@ -196,7 +215,7 @@ document.addEventListener('keyup', function () {
 });
 //События на МЫШЬ
 document.querySelector('.buttonsWrap').addEventListener('click', function () {
-    newChar = event.target.textContent; // 1
+    newChar = event.target.textContent;
     if (validateSymbols.includes(newChar)) {
         addNumberAndShow();
     }
@@ -259,7 +278,12 @@ const cleanTitleArea = function () {
 };
 // Проверки 
 const checkLastSign = function () {
-    if (calcArr[calcArr.length - 1] == '-' || calcArr[calcArr.length - 1] == '+' || calcArr[calcArr.length - 1] == '*' || calcArr[calcArr.length - 1] == '/' || calcArr[calcArr.length - 1] == '.' || calcArr[calcArr.length - 1] == '(') {
+    if (calcArr[calcArr.length - 1] === '-' ||
+        calcArr[calcArr.length - 1] === '+' ||
+        calcArr[calcArr.length - 1] === '*' ||
+        calcArr[calcArr.length - 1] === '/' ||
+        calcArr[calcArr.length - 1] === '.' ||
+        calcArr[calcArr.length - 1] === '(') {
         calcArr.pop();
         checkLastSign();
     }
@@ -281,16 +305,20 @@ const checkEqualLength = function () {
 const checkDotsAndOperands = function () {
     let allDotsAndOperands = [];
     for (let j of calcArr) {
-        if (j == '.' || j == '+' || j == '-' || j == '*' || j == '/') {
+        if (j === '.' ||
+            j === '+' ||
+            j === '-' ||
+            j === '*' ||
+            j === '/') {
             allDotsAndOperands.push(j);
         }
     }
-    if (allDotsAndOperands[allDotsAndOperands.length - 1] == '.' ||
-        calcArr[calcArr.length - 1] == '+' ||
-        calcArr[calcArr.length - 1] == '-' ||
-        calcArr[calcArr.length - 1] == '*' ||
-        calcArr[calcArr.length - 1] == '/') {
-        return calcStr;
+    if (allDotsAndOperands[allDotsAndOperands.length - 1] === '.' ||
+        calcArr[calcArr.length - 1] === '+' ||
+        calcArr[calcArr.length - 1] === '-' ||
+        calcArr[calcArr.length - 1] === '*' ||
+        calcArr[calcArr.length - 1] === '/') {
+        return;
     }
     else {
         let newChar = document.querySelector('.but_dot').innerHTML;

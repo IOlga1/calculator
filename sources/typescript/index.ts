@@ -1,23 +1,23 @@
 
-let memoryPlusArr = [];
+let memoryPlusArr: string[] = [];
 let newChar: string;
 // НАЖАТИЕ КНОПОК И ОТОБРАЖЕНИЕ В ПОЛЕ 
-let calcArr = [];
-let calcStr = '0';
-let equal = '0';
+let calcArr: string[] = [];
+let calcStr: string = '0';
+let equal: string = '0';
 document.querySelector('.calcFinish').innerHTML = equal;
 document.querySelector('.topNumberArea').innerHTML = '0';
-const validateSymbols = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
+const validateSymbols: string[] = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
 
 // Функции - ПРОВЕРКИ
- 
+
 // =
-const writeEqual = function () {
+const writeEqual = function (): void {
     if (calcArr.length > 0) {
         checkLastSign();
         calcStr = calcArr.join('');
         try {
-            if (calcArr.length == 0) {
+            if (calcArr.length === 0) {
                 equal = '0';
             } else {
                 equal = eval(calcStr);
@@ -30,11 +30,15 @@ const writeEqual = function () {
 }
 
 // '+'
-const writeNumberPlus = function () {
+const writeNumberPlus = function (): void {
     newChar = '+';
-    if (calcArr.length == 0 || calcArr[calcArr.length - 1] == '(') {
-        return calcStr;
-    } else if (calcArr[calcArr.length - 1] == '-' || calcArr[calcArr.length - 1] == '+' || calcArr[calcArr.length - 1] == '*' || calcArr[calcArr.length - 1] == '/' || calcArr[calcArr.length - 1] == '.') {
+    if (calcArr.length === 0 || calcArr[calcArr.length - 1] === '(') {
+        return
+    } else if (calcArr[calcArr.length - 1] === '-' ||
+        calcArr[calcArr.length - 1] === '+' ||
+        calcArr[calcArr.length - 1] === '*' ||
+        calcArr[calcArr.length - 1] === '/' ||
+        calcArr[calcArr.length - 1] === '.') {
         calcArr.pop()
         addNumberAndShow();
     } else {
@@ -43,9 +47,13 @@ const writeNumberPlus = function () {
 }
 
 // '-'
-const writeNumberMinus = function () {
+const writeNumberMinus = function (): void {
     newChar = '-';
-    if (calcArr[calcArr.length - 1] == '-' || calcArr[calcArr.length - 1] == '+' || calcArr[calcArr.length - 1] == '*' || calcArr[calcArr.length - 1] == '/' || calcArr[calcArr.length - 1] == '.') {
+    if (calcArr[calcArr.length - 1] === '-' ||
+        calcArr[calcArr.length - 1] === '+' ||
+        calcArr[calcArr.length - 1] === '*' ||
+        calcArr[calcArr.length - 1] === '/' ||
+        calcArr[calcArr.length - 1] === '.') {
         calcArr.pop()
         addNumberAndShow();
     } else {
@@ -54,11 +62,15 @@ const writeNumberMinus = function () {
 }
 
 // '*'
-const writeNumberUmn = function () {
+const writeNumberUmn = function (): void {
     newChar = '*';
     if (calcArr.length == 0 || calcArr[calcArr.length - 1] == '(') {
-        return calcStr;
-    } else if (calcArr[calcArr.length - 1] == '-' || calcArr[calcArr.length - 1] == '+' || calcArr[calcArr.length - 1] == '*' || calcArr[calcArr.length - 1] == '/' || calcArr[calcArr.length - 1] == '.') {
+        return;
+    } else if (calcArr[calcArr.length - 1] === '-' ||
+        calcArr[calcArr.length - 1] === '+' ||
+        calcArr[calcArr.length - 1] === '*' ||
+        calcArr[calcArr.length - 1] === '/' ||
+        calcArr[calcArr.length - 1] === '.') {
         calcArr.pop();
         addNumberAndShow();
     } else {
@@ -67,11 +79,15 @@ const writeNumberUmn = function () {
 }
 
 // '/'
-const writeNumberAx = function () {
+const writeNumberAx = function (): void {
     newChar = '/';
     if (calcArr.length == 0 || calcArr[calcArr.length - 1] == '(') {
-        return calcStr;
-    } else if (calcArr[calcArr.length - 1] == '-' || calcArr[calcArr.length - 1] == '+' || calcArr[calcArr.length - 1] == '*' || calcArr[calcArr.length - 1] == '/' || calcArr[calcArr.length - 1] == '.') {
+        return;
+    } else if (calcArr[calcArr.length - 1] === '-' ||
+        calcArr[calcArr.length - 1] === '+' ||
+        calcArr[calcArr.length - 1] === '*' ||
+        calcArr[calcArr.length - 1] === '/' ||
+        calcArr[calcArr.length - 1] === '.') {
         calcArr.pop()
         addNumberAndShow();
     } else {
@@ -80,19 +96,19 @@ const writeNumberAx = function () {
 }
 
 // 'C'
-const calcBackspace = function () {
+const calcBackspace = function (): void {
     calcArr.pop();
     calcStr = calcArr.join('');
     document.querySelector('.topNumberArea').innerHTML = calcStr;
     changeFontSizeTopNumberPlate();
-    if (calcArr.length == 0) {
+    if (calcArr.length === 0) {
         document.querySelector('.topNumberArea').innerHTML = '0';
     }
     changeFontSizeTopNumberPlate();
 }
 
 // 'AC'
-const calcCleanAll = function () {
+const calcCleanAll = function (): void {
     calcArr = [];
     calcStr = '0';
     document.querySelector('.topNumberArea').innerHTML = calcStr;
@@ -101,15 +117,15 @@ const calcCleanAll = function () {
 }
 
 // 'M-'
-const memoryMinus = function () {
+const memoryMinus = function (): void {
     memoryPlusArr = [];
     document.querySelector('.forMPlus').innerHTML = '';
 }
 
 // 'M+'
-const memoryPlus = function () {
+const memoryPlus = function (): void {
     memoryPlusArr = equal.split('');
-    if (equal.length == 0) {
+    if (equal.length === 0) {
         document.querySelector('.titleArea').innerHTML = 'ПРИСВОЙТЕ ЗНАЧЕНИЕ';
         cleanTitleArea();
     } else if (equal.length > 0) {
@@ -118,7 +134,7 @@ const memoryPlus = function () {
 }
 
 // 'MR'
-const memoryExtract = function () {
+const memoryExtract = function (): void {
     calcArr = calcArr.concat(memoryPlusArr);
     calcStr = calcArr.join('');
     document.querySelector('.topNumberArea').innerHTML = calcStr;
@@ -127,10 +143,10 @@ const memoryExtract = function () {
 }
 
 // '.'
-const writeNumberDot = function () {
+const writeNumberDot = function (): void {
     newChar = '.';
-    if (calcArr.length == 0) {
-        return calcStr;
+    if (calcArr.length === 0) {
+        return;
     } else if (calcArr.includes('.')) {
         checkDotsAndOperands();
     } else {
@@ -139,10 +155,13 @@ const writeNumberDot = function () {
 }
 
 // '('
-const writeScobLeft = function () {
+const writeScobLeft = function (): void {
     newChar = '(';
-    if (calcArr.length != 0) {
-        if (calcArr[calcArr.length - 1] != '+' && calcArr[calcArr.length - 1] != '-' && calcArr[calcArr.length - 1] != '*' && calcArr[calcArr.length - 1] != '/') {
+    if (calcArr.length !== 0) {
+        if (calcArr[calcArr.length - 1] !== '+' &&
+            calcArr[calcArr.length - 1] !== '-' &&
+            calcArr[calcArr.length - 1] !== '*' &&
+            calcArr[calcArr.length - 1] !== '/') {
             calcArr.push('*');
             addNumberAndShow();
         } else {
@@ -154,7 +173,7 @@ const writeScobLeft = function () {
 }
 
 // ')'
-const writeScobRight = function () {
+const writeScobRight = function (): void {
     newChar = ')';
     addNumberAndShow();
 }
@@ -163,8 +182,9 @@ const writeScobRight = function () {
 
 
 
+
 // События на КЛАВИАТУРУ
-document.addEventListener('keyup', function () {
+document.addEventListener('keyup', function (): void {
     newChar = event.key;
     if (validateSymbols.includes(newChar)) {
         addNumberAndShow();
@@ -195,8 +215,8 @@ document.addEventListener('keyup', function () {
 
 
 //События на МЫШЬ
-document.querySelector('.buttonsWrap').addEventListener('click', function () {
-    newChar = event.target.textContent;   // 1
+document.querySelector('.buttonsWrap').addEventListener('click', function (): void {
+    newChar = event.target.textContent;
 
     if (validateSymbols.includes(newChar)) {
         addNumberAndShow();
@@ -236,20 +256,20 @@ document.querySelector('.buttonsWrap').addEventListener('click', function () {
 
 
 // Действия
-const addNumberAndShow = function () {
+const addNumberAndShow = function (): void {
     calcArr.push(newChar);
     calcStr = calcArr.join('');
     document.querySelector('.topNumberArea').innerHTML = calcStr;
     changeFontSizeTopNumberPlate();
 }
 
-const getCorrectExpresion = function () {
+const getCorrectExpresion = function (): void {
     document.querySelector('.titleArea').innerHTML = 'ВВЕДИТЕ КОРРЕКТНОЕ ВЫРАЖЕНИЕ';
     cleanTitleArea();
 }
 
-const cleanTitleArea = function () {
-    setTimeout(function letsClean() {
+const cleanTitleArea = function (): void {
+    setTimeout(function letsClean(): void {
         document.querySelector('.titleArea').innerHTML = '';
     }, 3000)
 }
@@ -259,12 +279,14 @@ const cleanTitleArea = function () {
 
 
 
-
-
-
 // Проверки 
-const checkLastSign = function () {
-    if (calcArr[calcArr.length - 1] == '-' || calcArr[calcArr.length - 1] == '+' || calcArr[calcArr.length - 1] == '*' || calcArr[calcArr.length - 1] == '/' || calcArr[calcArr.length - 1] == '.' || calcArr[calcArr.length - 1] == '(') {
+const checkLastSign = function (): void {
+    if (calcArr[calcArr.length - 1] === '-' ||
+        calcArr[calcArr.length - 1] === '+' ||
+        calcArr[calcArr.length - 1] === '*' ||
+        calcArr[calcArr.length - 1] === '/' ||
+        calcArr[calcArr.length - 1] === '.' ||
+        calcArr[calcArr.length - 1] === '(') {
         calcArr.pop()
         checkLastSign();
     } else {
@@ -274,7 +296,7 @@ const checkLastSign = function () {
 }
 
 
-const checkEqualLength = function () {
+const checkEqualLength = function (): void {
     equal = String(equal);
     if (equal.length > 11) {
         equal = equal.substring(0, 10);
@@ -285,19 +307,23 @@ const checkEqualLength = function () {
 }
 
 
-const checkDotsAndOperands = function () {
+const checkDotsAndOperands = function (): void {
     let allDotsAndOperands = [];
     for (let j of calcArr) {
-        if (j == '.' || j == '+' || j == '-' || j == '*' || j == '/') {
+        if (j === '.' ||
+            j === '+' ||
+            j === '-' ||
+            j === '*' ||
+            j === '/') {
             allDotsAndOperands.push(j);
         }
     }
-    if (allDotsAndOperands[allDotsAndOperands.length - 1] == '.' ||
-        calcArr[calcArr.length - 1] == '+' ||
-        calcArr[calcArr.length - 1] == '-' ||
-        calcArr[calcArr.length - 1] == '*' ||
-        calcArr[calcArr.length - 1] == '/') {
-        return calcStr;
+    if (allDotsAndOperands[allDotsAndOperands.length - 1] === '.' ||
+        calcArr[calcArr.length - 1] === '+' ||
+        calcArr[calcArr.length - 1] === '-' ||
+        calcArr[calcArr.length - 1] === '*' ||
+        calcArr[calcArr.length - 1] === '/') {
+        return;
     } else {
         let newChar = document.querySelector('.but_dot').innerHTML;
         calcArr.push(newChar);
@@ -307,7 +333,7 @@ const checkDotsAndOperands = function () {
     }
 }
 
-const changeFontSizeTopNumberPlate = function () {
+const changeFontSizeTopNumberPlate = function (): void {
     if (calcStr.length > 33) {
         document.querySelector('.topNumberArea').style.fontSize = '15px';
     }
