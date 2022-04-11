@@ -70,7 +70,7 @@ const writeNumberPlus = function () {
 //     }
 // }
 // '-'
-let writeNumberMinus = function () {
+const writeNumberMinus = function () {
     newChar = '-';
     if (calcArr[calcArr.length - 1] == '-' || calcArr[calcArr.length - 1] == '+' || calcArr[calcArr.length - 1] == '*' || calcArr[calcArr.length - 1] == '/' || calcArr[calcArr.length - 1] == '.') {
         calcArr.pop();
@@ -90,7 +90,7 @@ let writeNumberMinus = function () {
 //     }
 // }
 // '*'
-let writeNumberUmn = function () {
+const writeNumberUmn = function () {
     newChar = '*';
     if (calcArr.length == 0 || calcArr[calcArr.length - 1] == '(') {
         return calcStr;
@@ -115,7 +115,7 @@ let writeNumberUmn = function () {
 //     }
 // }
 // '/'
-let writeNumberAx = function () {
+const writeNumberAx = function () {
     newChar = '/';
     if (calcArr.length == 0 || calcArr[calcArr.length - 1] == '(') {
         return calcStr;
@@ -364,6 +364,7 @@ document.querySelector('.buttonsWrap').addEventListener('click', function () {
         writeEqual();
     }
 });
+// Действия
 const addNumberAndShow = function () {
     calcArr.push(newChar);
     calcStr = calcArr.join('');
@@ -395,7 +396,7 @@ const cleanTitleArea = function () {
 //     }, 3000)
 // }
 // Проверки 
-function checkLastSign() {
+const checkLastSign = function () {
     if (calcArr[calcArr.length - 1] == '-' || calcArr[calcArr.length - 1] == '+' || calcArr[calcArr.length - 1] == '*' || calcArr[calcArr.length - 1] == '/' || calcArr[calcArr.length - 1] == '.' || calcArr[calcArr.length - 1] == '(') {
         calcArr.pop();
         checkLastSign();
@@ -404,8 +405,17 @@ function checkLastSign() {
         calcStr = calcArr.join('');
         document.querySelector('.topNumberArea').innerHTML = calcStr;
     }
-}
-function checkEqualLength() {
+};
+// function checkLastSign() {
+//     if (calcArr[calcArr.length - 1] == '-' || calcArr[calcArr.length - 1] == '+' || calcArr[calcArr.length - 1] == '*' || calcArr[calcArr.length - 1] == '/' || calcArr[calcArr.length - 1] == '.' || calcArr[calcArr.length - 1] == '(') {
+//         calcArr.pop()
+//         checkLastSign();
+//     } else {
+//         calcStr = calcArr.join('');
+//         document.querySelector('.topNumberArea').innerHTML = calcStr;
+//     }
+// }
+const checkEqualLength = function () {
     equal = String(equal);
     if (equal.length > 11) {
         equal = equal.substring(0, 10);
@@ -414,8 +424,17 @@ function checkEqualLength() {
     else {
         document.querySelector('.calcFinish').innerHTML = equal;
     }
-}
-function checkDotsAndOperands() {
+};
+// function checkEqualLength() {
+//     equal = String(equal);
+//     if (equal.length > 11) {
+//         equal = equal.substring(0, 10);
+//         document.querySelector('.calcFinish').innerHTML = equal + `<span style="font-size: 22px;">...</span>`;
+//     } else {
+//         document.querySelector('.calcFinish').innerHTML = equal;
+//     }
+// }
+const checkDotsAndOperands = function () {
     let allDotsAndOperands = [];
     for (let j of calcArr) {
         if (j == '.' || j == '+' || j == '-' || j == '*' || j == '/') {
@@ -436,8 +455,29 @@ function checkDotsAndOperands() {
         document.querySelector('.topNumberArea').innerHTML = calcStr;
         changeFontSizeTopNumberPlate();
     }
-}
-function changeFontSizeTopNumberPlate() {
+};
+// function checkDotsAndOperands() {
+//     let allDotsAndOperands = [];
+//     for (let j of calcArr) {
+//         if (j == '.' || j == '+' || j == '-' || j == '*' || j == '/') {
+//             allDotsAndOperands.push(j);
+//         }
+//     }
+//     if (allDotsAndOperands[allDotsAndOperands.length - 1] == '.' ||
+//         calcArr[calcArr.length - 1] == '+' ||
+//         calcArr[calcArr.length - 1] == '-' ||
+//         calcArr[calcArr.length - 1] == '*' ||
+//         calcArr[calcArr.length - 1] == '/') {
+//         return calcStr;
+//     } else {
+//         let newChar = document.querySelector('.but_dot').innerHTML;
+//         calcArr.push(newChar);
+//         calcStr = calcArr.join('');
+//         document.querySelector('.topNumberArea').innerHTML = calcStr;
+//         changeFontSizeTopNumberPlate();
+//     }
+// }
+const changeFontSizeTopNumberPlate = function () {
     // if (calcStr.length <= 33) {
     //     document.querySelector('.topNumberArea').style.fontSize = '';
     // }
@@ -459,4 +499,27 @@ function changeFontSizeTopNumberPlate() {
     if (calcStr.length > 49) {
         document.querySelector('.topNumberArea').innerHTML = `<span style="font-size: 14px;">...</span>`;
     }
-}
+};
+// function changeFontSizeTopNumberPlate() {
+//     // if (calcStr.length <= 33) {
+//     //     document.querySelector('.topNumberArea').style.fontSize = '';
+//     // }
+//     if (calcStr.length > 33) {
+//         document.querySelector('.topNumberArea').style.fontSize = '15px';
+//     }
+//     if (calcStr.length > 36) {
+//         document.querySelector('.topNumberArea').style.fontSize = '14px';
+//     }
+//     if (calcStr.length > 39) {
+//         document.querySelector('.topNumberArea').style.fontSize = '13px';
+//     }
+//     if (calcStr.length > 42) {
+//         document.querySelector('.topNumberArea').style.fontSize = '12px';
+//     }
+//     if (calcStr.length > 45) {
+//         document.querySelector('.topNumberArea').style.fontSize = '11px';
+//     }
+//     if (calcStr.length > 49) {
+//         document.querySelector('.topNumberArea').innerHTML = `<span style="font-size: 14px;">...</span>`;
+//     }
+// }
