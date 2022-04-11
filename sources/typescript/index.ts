@@ -10,7 +10,7 @@ document.querySelector('.topNumberArea').innerHTML = '0';
 const validateSymbols = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
 
 // Функции - ПРОВЕРКИ
-
+ 
 // =
 const writeEqual = function () {
     if (calcArr.length > 0) {
@@ -29,24 +29,6 @@ const writeEqual = function () {
     }
 }
 
-// function writeEqual() {
-//     if (calcArr.length > 0) {
-//         checkLastSign();
-//         calcStr = calcArr.join('');
-//         try {
-//             if (calcArr.length == 0) {
-//                 equal = '0';
-//             } else {
-//                 equal = eval(calcStr);
-//             }
-//         } catch {
-//             getCorrectExpresion();
-//         }
-//         equal = equal; 
-//         checkEqualLength();
-//     }
-// }
-
 // '+'
 const writeNumberPlus = function () {
     newChar = '+';
@@ -60,18 +42,6 @@ const writeNumberPlus = function () {
     }
 }
 
-// function writeNumberPlus() {
-//     newChar = '+';
-//     if (calcArr.length == 0 || calcArr[calcArr.length - 1] == '(') {
-//         return calcStr;
-//     } else if (calcArr[calcArr.length - 1] == '-' || calcArr[calcArr.length - 1] == '+' || calcArr[calcArr.length - 1] == '*' || calcArr[calcArr.length - 1] == '/' || calcArr[calcArr.length - 1] == '.') {
-//         calcArr.pop()
-//         addNumberAndShow();
-//     } else {
-//         addNumberAndShow();
-//     }
-// }
-
 // '-'
 const writeNumberMinus = function () {
     newChar = '-';
@@ -82,16 +52,6 @@ const writeNumberMinus = function () {
         addNumberAndShow();
     }
 }
-
-// function writeNumberMinus() {
-//     newChar = '-';
-//     if (calcArr[calcArr.length - 1] == '-' || calcArr[calcArr.length - 1] == '+' || calcArr[calcArr.length - 1] == '*' || calcArr[calcArr.length - 1] == '/' || calcArr[calcArr.length - 1] == '.') {
-//         calcArr.pop()
-//         addNumberAndShow();
-//     } else {
-//         addNumberAndShow();
-//     }
-// }
 
 // '*'
 const writeNumberUmn = function () {
@@ -106,18 +66,6 @@ const writeNumberUmn = function () {
     }
 }
 
-// function writeNumberUmn() {
-//     newChar = '*';
-//     if (calcArr.length == 0 || calcArr[calcArr.length - 1] == '(') {
-//         return calcStr;
-//     } else if (calcArr[calcArr.length - 1] == '-' || calcArr[calcArr.length - 1] == '+' || calcArr[calcArr.length - 1] == '*' || calcArr[calcArr.length - 1] == '/' || calcArr[calcArr.length - 1] == '.') {
-//         calcArr.pop();
-//         addNumberAndShow();
-//     } else {
-//         addNumberAndShow();
-//     }
-// }
-
 // '/'
 const writeNumberAx = function () {
     newChar = '/';
@@ -131,18 +79,6 @@ const writeNumberAx = function () {
     }
 }
 
-// function writeNumberAx() {
-//     newChar = '/';
-//     if (calcArr.length == 0 || calcArr[calcArr.length - 1] == '(') {
-//         return calcStr;
-//     } else if (calcArr[calcArr.length - 1] == '-' || calcArr[calcArr.length - 1] == '+' || calcArr[calcArr.length - 1] == '*' || calcArr[calcArr.length - 1] == '/' || calcArr[calcArr.length - 1] == '.') {
-//         calcArr.pop()
-//         addNumberAndShow();
-//     } else {
-//         addNumberAndShow();
-//     }
-// }
-
 // 'C'
 const calcBackspace = function () {
     calcArr.pop();
@@ -155,17 +91,6 @@ const calcBackspace = function () {
     changeFontSizeTopNumberPlate();
 }
 
-// function calcBackspace() {
-//     calcArr.pop();
-//     calcStr = calcArr.join('');
-//     document.querySelector('.topNumberArea').innerHTML = calcStr;
-//     changeFontSizeTopNumberPlate();
-//     if (calcArr.length == 0) {
-//         document.querySelector('.topNumberArea').innerHTML = '0';
-//     }
-//     changeFontSizeTopNumberPlate();
-// }
-
 // 'AC'
 const calcCleanAll = function () {
     calcArr = [];
@@ -175,24 +100,11 @@ const calcCleanAll = function () {
     changeFontSizeTopNumberPlate();
 }
 
-// function calcCleanAll() {
-//     calcArr = [];
-//     calcStr = '0';
-//     document.querySelector('.topNumberArea').innerHTML = calcStr;
-//     document.querySelector('.calcFinish').innerHTML = '0';
-//     changeFontSizeTopNumberPlate();
-// }
-
 // 'M-'
 const memoryMinus = function () {
     memoryPlusArr = [];
     document.querySelector('.forMPlus').innerHTML = '';
 }
-
-// function memoryMinus() {
-//     memoryPlusArr = [];
-//     document.querySelector('.forMPlus').innerHTML = '';
-// }
 
 // 'M+'
 const memoryPlus = function () {
@@ -205,16 +117,6 @@ const memoryPlus = function () {
     }
 }
 
-// function memoryPlus() {
-//     memoryPlusArr = equal.split('');
-//     if (equal.length == 0) {
-//         document.querySelector('.titleArea').innerHTML = 'ПРИСВОЙТЕ ЗНАЧЕНИЕ';
-//         cleanTitleArea();
-//     } else if (equal.length > 0) {
-//         document.querySelector('.forMPlus').innerHTML = 'M+';
-//     }
-// }
-
 // 'MR'
 const memoryExtract = function () {
     calcArr = calcArr.concat(memoryPlusArr);
@@ -223,14 +125,6 @@ const memoryExtract = function () {
     changeFontSizeTopNumberPlate();
     document.querySelector('.titleArea').innerHTML = '';
 }
-
-// function memoryExtract() {
-//     calcArr = calcArr.concat(memoryPlusArr);
-//     calcStr = calcArr.join('');
-//     document.querySelector('.topNumberArea').innerHTML = calcStr;
-//     changeFontSizeTopNumberPlate();
-//     document.querySelector('.titleArea').innerHTML = '';
-// }
 
 // '.'
 const writeNumberDot = function () {
@@ -243,17 +137,6 @@ const writeNumberDot = function () {
         addNumberAndShow();
     }
 }
-
-// function writeNumberDot() {
-//     newChar = '.';
-//     if (calcArr.length == 0) {
-//         return calcStr;
-//     } else if (calcArr.includes('.')) {
-//         checkDotsAndOperands();
-//     } else {
-//         addNumberAndShow();
-//     }
-// }
 
 // '('
 const writeScobLeft = function () {
@@ -270,36 +153,11 @@ const writeScobLeft = function () {
     }
 }
 
-// function writeScobLeft() {
-//     newChar = '(';
-//     if (calcArr.length != 0) {
-//         if (calcArr[calcArr.length - 1] != '+' && calcArr[calcArr.length - 1] != '-' && calcArr[calcArr.length - 1] != '*' && calcArr[calcArr.length - 1] != '/') {
-//             calcArr.push('*');
-//             addNumberAndShow();
-//         } else {
-//             addNumberAndShow();
-//         }
-//     } else {
-//         addNumberAndShow();
-//     }
-// }
-
 // ')'
 const writeScobRight = function () {
     newChar = ')';
     addNumberAndShow();
 }
-
-// function writeScobRight() {
-//     newChar = ')';
-//     addNumberAndShow();
-// }
-
-
-
-
-
-
 
 
 
@@ -378,7 +236,6 @@ document.querySelector('.buttonsWrap').addEventListener('click', function () {
 
 
 // Действия
-
 const addNumberAndShow = function () {
     calcArr.push(newChar);
     calcStr = calcArr.join('');
@@ -386,38 +243,16 @@ const addNumberAndShow = function () {
     changeFontSizeTopNumberPlate();
 }
 
-// function addNumberAndShow() {
-//     calcArr.push(newChar);
-//     calcStr = calcArr.join('');
-//     document.querySelector('.topNumberArea').innerHTML = calcStr;
-//     changeFontSizeTopNumberPlate();
-// }
-
 const getCorrectExpresion = function () {
     document.querySelector('.titleArea').innerHTML = 'ВВЕДИТЕ КОРРЕКТНОЕ ВЫРАЖЕНИЕ';
     cleanTitleArea();
 }
-
-// function getCorrectExpresion() {
-//     document.querySelector('.titleArea').innerHTML = 'ВВЕДИТЕ КОРРЕКТНОЕ ВЫРАЖЕНИЕ';
-//     cleanTitleArea();
-// }
 
 const cleanTitleArea = function () {
     setTimeout(function letsClean() {
         document.querySelector('.titleArea').innerHTML = '';
     }, 3000)
 }
-
-// function cleanTitleArea() {
-//     setTimeout(function letsClean() {
-//         document.querySelector('.titleArea').innerHTML = '';
-//     }, 3000)
-// }
-
-
-
-
 
 
 
@@ -437,15 +272,7 @@ const checkLastSign = function () {
         document.querySelector('.topNumberArea').innerHTML = calcStr;
     }
 }
-// function checkLastSign() {
-//     if (calcArr[calcArr.length - 1] == '-' || calcArr[calcArr.length - 1] == '+' || calcArr[calcArr.length - 1] == '*' || calcArr[calcArr.length - 1] == '/' || calcArr[calcArr.length - 1] == '.' || calcArr[calcArr.length - 1] == '(') {
-//         calcArr.pop()
-//         checkLastSign();
-//     } else {
-//         calcStr = calcArr.join('');
-//         document.querySelector('.topNumberArea').innerHTML = calcStr;
-//     }
-// }
+
 
 const checkEqualLength = function () {
     equal = String(equal);
@@ -456,15 +283,7 @@ const checkEqualLength = function () {
         document.querySelector('.calcFinish').innerHTML = equal;
     }
 }
-// function checkEqualLength() {
-//     equal = String(equal);
-//     if (equal.length > 11) {
-//         equal = equal.substring(0, 10);
-//         document.querySelector('.calcFinish').innerHTML = equal + `<span style="font-size: 22px;">...</span>`;
-//     } else {
-//         document.querySelector('.calcFinish').innerHTML = equal;
-//     }
-// }
+
 
 const checkDotsAndOperands = function () {
     let allDotsAndOperands = [];
@@ -487,32 +306,8 @@ const checkDotsAndOperands = function () {
         changeFontSizeTopNumberPlate();
     }
 }
-// function checkDotsAndOperands() {
-//     let allDotsAndOperands = [];
-//     for (let j of calcArr) {
-//         if (j == '.' || j == '+' || j == '-' || j == '*' || j == '/') {
-//             allDotsAndOperands.push(j);
-//         }
-//     }
-//     if (allDotsAndOperands[allDotsAndOperands.length - 1] == '.' ||
-//         calcArr[calcArr.length - 1] == '+' ||
-//         calcArr[calcArr.length - 1] == '-' ||
-//         calcArr[calcArr.length - 1] == '*' ||
-//         calcArr[calcArr.length - 1] == '/') {
-//         return calcStr;
-//     } else {
-//         let newChar = document.querySelector('.but_dot').innerHTML;
-//         calcArr.push(newChar);
-//         calcStr = calcArr.join('');
-//         document.querySelector('.topNumberArea').innerHTML = calcStr;
-//         changeFontSizeTopNumberPlate();
-//     }
-// }
 
 const changeFontSizeTopNumberPlate = function () {
-    // if (calcStr.length <= 33) {
-    //     document.querySelector('.topNumberArea').style.fontSize = '';
-    // }
     if (calcStr.length > 33) {
         document.querySelector('.topNumberArea').style.fontSize = '15px';
     }
@@ -531,27 +326,4 @@ const changeFontSizeTopNumberPlate = function () {
     if (calcStr.length > 49) {
         document.querySelector('.topNumberArea').innerHTML = `<span style="font-size: 14px;">...</span>`;
     }
-}
-// function changeFontSizeTopNumberPlate() {
-//     // if (calcStr.length <= 33) {
-//     //     document.querySelector('.topNumberArea').style.fontSize = '';
-//     // }
-//     if (calcStr.length > 33) {
-//         document.querySelector('.topNumberArea').style.fontSize = '15px';
-//     }
-//     if (calcStr.length > 36) {
-//         document.querySelector('.topNumberArea').style.fontSize = '14px';
-//     }
-//     if (calcStr.length > 39) {
-//         document.querySelector('.topNumberArea').style.fontSize = '13px';
-//     }
-//     if (calcStr.length > 42) {
-//         document.querySelector('.topNumberArea').style.fontSize = '12px';
-//     }
-//     if (calcStr.length > 45) {
-//         document.querySelector('.topNumberArea').style.fontSize = '11px';
-//     }
-//     if (calcStr.length > 49) {
-//         document.querySelector('.topNumberArea').innerHTML = `<span style="font-size: 14px;">...</span>`;
-//     }
-// }
+} 
