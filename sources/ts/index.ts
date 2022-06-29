@@ -1,12 +1,12 @@
 
 let memoryPlusArr: string[] = [];
 let newChar: string;
-// НАЖАТИЕ КНОПОК И ОТОБРАЖЕНИЕ В ПОЛЕ 
+// НАЖАТИЕ КНОПОК И ОТОБРАЖЕНИЕ В ПОЛЕ
 let calcArr: string[] = [];
 let calcStr: string = '0';
 let equal: string = '0';
-document.querySelector('.calcFinish').innerHTML = equal;
-document.querySelector('.topNumberArea').innerHTML = '0';
+document.querySelector('.calcFinish')!.innerHTML = equal;
+document.querySelector('.topNumberArea')!.innerHTML = '0';
 const validateSymbols: string[] = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
 
 // Функции - ПРОВЕРКИ
@@ -99,10 +99,10 @@ const writeNumberAx = function (): void {
 const calcBackspace = function (): void {
     calcArr.pop();
     calcStr = calcArr.join('');
-    document.querySelector('.topNumberArea').innerHTML = calcStr;
+    document.querySelector('.topNumberArea')!.innerHTML = calcStr;
     changeFontSizeTopNumberPlate();
     if (calcArr.length === 0) {
-        document.querySelector('.topNumberArea').innerHTML = '0';
+        document.querySelector('.topNumberArea')!.innerHTML = '0';
     }
     changeFontSizeTopNumberPlate();
 }
@@ -111,25 +111,25 @@ const calcBackspace = function (): void {
 const calcCleanAll = function (): void {
     calcArr = [];
     calcStr = '0';
-    document.querySelector('.topNumberArea').innerHTML = calcStr;
-    document.querySelector('.calcFinish').innerHTML = '0';
+    document.querySelector('.topNumberArea')!.innerHTML = calcStr;
+    document.querySelector('.calcFinish')!.innerHTML = '0';
     changeFontSizeTopNumberPlate();
 }
 
 // 'M-'
 const memoryMinus = function (): void {
     memoryPlusArr = [];
-    document.querySelector('.forMPlus').innerHTML = '';
+    document.querySelector('.forMPlus')!.innerHTML = '';
 }
 
 // 'M+'
 const memoryPlus = function (): void {
     memoryPlusArr = equal.split('');
     if (equal.length === 0) {
-        document.querySelector('.titleArea').innerHTML = 'ПРИСВОЙТЕ ЗНАЧЕНИЕ';
+        document.querySelector('.titleArea')!.innerHTML = 'ПРИСВОЙТЕ ЗНАЧЕНИЕ';
         cleanTitleArea();
     } else if (equal.length > 0) {
-        document.querySelector('.forMPlus').innerHTML = 'M+';
+        document.querySelector('.forMPlus')!.innerHTML = 'M+';
     }
 }
 
@@ -137,9 +137,9 @@ const memoryPlus = function (): void {
 const memoryExtract = function (): void {
     calcArr = calcArr.concat(memoryPlusArr);
     calcStr = calcArr.join('');
-    document.querySelector('.topNumberArea').innerHTML = calcStr;
+    document.querySelector('.topNumberArea')!.innerHTML = calcStr;
     changeFontSizeTopNumberPlate();
-    document.querySelector('.titleArea').innerHTML = '';
+    document.querySelector('.titleArea')!.innerHTML = '';
 }
 
 // '.'
@@ -155,7 +155,7 @@ const writeNumberDot = function (): void {
 }
 
 // '('
-const writeScobLeft = function (): void {
+const writeBracketLeft = function (): void {
     newChar = '(';
     if (calcArr.length !== 0) {
         if (calcArr[calcArr.length - 1] !== '+' &&
@@ -173,14 +173,10 @@ const writeScobLeft = function (): void {
 }
 
 // ')'
-const writeScobRight = function (): void {
+const writeBracketRight = function (): void {
     newChar = ')';
     addNumberAndShow();
 }
-
-
-
-
 
 
 // События на КЛАВИАТУРУ
@@ -205,17 +201,15 @@ document.addEventListener('keyup', function (): void {
     } else if (newChar === '.') {
         writeNumberDot();
     } else if (newChar === '(') {
-        writeScobLeft();
+        writeBracketLeft();
     } else if (newChar === ')') {
-        writeScobRight();
+        writeBracketRight();
     }
 })
 
 
-
-
 //События на МЫШЬ
-document.querySelector('.buttonsWrap').addEventListener('click', function (): void {
+document.querySelector('.buttonsWrap')!.addEventListener('click', function (): void {
     newChar = event.target.textContent;
 
     if (validateSymbols.includes(newChar)) {
@@ -240,9 +234,9 @@ document.querySelector('.buttonsWrap').addEventListener('click', function (): vo
     } else if (newChar === 'AC') {
         calcCleanAll();
     } else if (newChar === '(') {
-        writeScobLeft();
+        writeBracketLeft();
     } else if (newChar === ')') {
-        writeScobRight();
+        writeBracketRight();
     } else if (newChar === '.') {
         writeNumberDot();
     } else if (newChar === '=') {
@@ -251,32 +245,24 @@ document.querySelector('.buttonsWrap').addEventListener('click', function (): vo
 })
 
 
-
-
-
-
 // Действия
 const addNumberAndShow = function (): void {
     calcArr.push(newChar);
     calcStr = calcArr.join('');
-    document.querySelector('.topNumberArea').innerHTML = calcStr;
+    document.querySelector('.topNumberArea')!.innerHTML = calcStr;
     changeFontSizeTopNumberPlate();
 }
 
 const getCorrectExpresion = function (): void {
-    document.querySelector('.titleArea').innerHTML = 'ВВЕДИТЕ КОРРЕКТНОЕ ВЫРАЖЕНИЕ';
+    document.querySelector('.titleArea')!.innerHTML = 'ВВЕДИТЕ КОРРЕКТНОЕ ВЫРАЖЕНИЕ';
     cleanTitleArea();
 }
 
 const cleanTitleArea = function (): void {
     setTimeout(function letsClean(): void {
-        document.querySelector('.titleArea').innerHTML = '';
+        document.querySelector('.titleArea')!.innerHTML = '';
     }, 3000)
 }
-
-
-
-
 
 
 // Проверки 
@@ -291,7 +277,7 @@ const checkLastSign = function (): void {
         checkLastSign();
     } else {
         calcStr = calcArr.join('');
-        document.querySelector('.topNumberArea').innerHTML = calcStr;
+        document.querySelector('.topNumberArea')!.innerHTML = calcStr;
     }
 }
 
@@ -300,15 +286,15 @@ const checkEqualLength = function (): void {
     equal = String(equal);
     if (equal.length > 11) {
         equal = equal.substring(0, 10);
-        document.querySelector('.calcFinish').innerHTML = equal + `<span style="font-size: 22px;">...</span>`;
+        document.querySelector('.calcFinish')!.innerHTML = equal + `<span style="font-size: 22px;">...</span>`;
     } else {
-        document.querySelector('.calcFinish').innerHTML = equal;
+        document.querySelector('.calcFinish')!.innerHTML = equal;
     }
 }
 
 
 const checkDotsAndOperands = function (): void {
-    let allDotsAndOperands = [];
+    let allDotsAndOperands: string[] = [];
     for (let j of calcArr) {
         if (j === '.' ||
             j === '+' ||
@@ -325,31 +311,34 @@ const checkDotsAndOperands = function (): void {
         calcArr[calcArr.length - 1] === '/') {
         return;
     } else {
-        let newChar = document.querySelector('.but_dot').innerHTML;
+        let newChar = document.querySelector('.but_dot')!.innerHTML;
         calcArr.push(newChar);
         calcStr = calcArr.join('');
-        document.querySelector('.topNumberArea').innerHTML = calcStr;
+        document.querySelector('.topNumberArea')!.innerHTML = calcStr;
         changeFontSizeTopNumberPlate();
     }
 }
 
 const changeFontSizeTopNumberPlate = function (): void {
+    const elem: any = document.querySelector('.topNumberArea');
+
     if (calcStr.length > 33) {
-        document.querySelector('.topNumberArea').style.fontSize = '15px';
+        elem.style.fontSize = '15px';
     }
     if (calcStr.length > 36) {
-        document.querySelector('.topNumberArea').style.fontSize = '14px';
+        elem!.style.fontSize = '14px';
     }
     if (calcStr.length > 39) {
-        document.querySelector('.topNumberArea').style.fontSize = '13px';
+        elem!.style.fontSize = '13px';
     }
     if (calcStr.length > 42) {
-        document.querySelector('.topNumberArea').style.fontSize = '12px';
+        elem!.style.fontSize = '12px';
     }
     if (calcStr.length > 45) {
-        document.querySelector('.topNumberArea').style.fontSize = '11px';
+        elem!.style.fontSize = '11px';
     }
     if (calcStr.length > 49) {
-        document.querySelector('.topNumberArea').innerHTML = `<span style="font-size: 14px;">...</span>`;
+        elem!.innerHTML = `<span style="font-size: 14px;">...</span>`;
     }
 } 
+

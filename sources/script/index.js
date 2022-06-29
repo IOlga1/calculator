@@ -1,6 +1,7 @@
+"use strict";
 let memoryPlusArr = [];
 let newChar;
-// НАЖАТИЕ КНОПОК И ОТОБРАЖЕНИЕ В ПОЛЕ 
+// НАЖАТИЕ КНОПОК И ОТОБРАЖЕНИЕ В ПОЛЕ
 let calcArr = [];
 let calcStr = '0';
 let equal = '0';
@@ -153,7 +154,7 @@ const writeNumberDot = function () {
     }
 };
 // '('
-const writeScobLeft = function () {
+const writeBracketLeft = function () {
     newChar = '(';
     if (calcArr.length !== 0) {
         if (calcArr[calcArr.length - 1] !== '+' &&
@@ -172,7 +173,7 @@ const writeScobLeft = function () {
     }
 };
 // ')'
-const writeScobRight = function () {
+const writeBracketRight = function () {
     newChar = ')';
     addNumberAndShow();
 };
@@ -207,10 +208,10 @@ document.addEventListener('keyup', function () {
         writeNumberDot();
     }
     else if (newChar === '(') {
-        writeScobLeft();
+        writeBracketLeft();
     }
     else if (newChar === ')') {
-        writeScobRight();
+        writeBracketRight();
     }
 });
 //События на МЫШЬ
@@ -248,10 +249,10 @@ document.querySelector('.buttonsWrap').addEventListener('click', function () {
         calcCleanAll();
     }
     else if (newChar === '(') {
-        writeScobLeft();
+        writeBracketLeft();
     }
     else if (newChar === ')') {
-        writeScobRight();
+        writeBracketRight();
     }
     else if (newChar === '.') {
         writeNumberDot();
@@ -329,22 +330,23 @@ const checkDotsAndOperands = function () {
     }
 };
 const changeFontSizeTopNumberPlate = function () {
+    const elem = document.querySelector('.topNumberArea');
     if (calcStr.length > 33) {
-        document.querySelector('.topNumberArea').style.fontSize = '15px';
+        elem.style.fontSize = '15px';
     }
     if (calcStr.length > 36) {
-        document.querySelector('.topNumberArea').style.fontSize = '14px';
+        elem.style.fontSize = '14px';
     }
     if (calcStr.length > 39) {
-        document.querySelector('.topNumberArea').style.fontSize = '13px';
+        elem.style.fontSize = '13px';
     }
     if (calcStr.length > 42) {
-        document.querySelector('.topNumberArea').style.fontSize = '12px';
+        elem.style.fontSize = '12px';
     }
     if (calcStr.length > 45) {
-        document.querySelector('.topNumberArea').style.fontSize = '11px';
+        elem.style.fontSize = '11px';
     }
     if (calcStr.length > 49) {
-        document.querySelector('.topNumberArea').innerHTML = `<span style="font-size: 14px;">...</span>`;
+        elem.innerHTML = `<span style="font-size: 14px;">...</span>`;
     }
 };
