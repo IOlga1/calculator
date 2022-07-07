@@ -8,21 +8,18 @@ let equal = '0';
 document.querySelector('.calcFinish').innerHTML = equal;
 document.querySelector('.topNumberArea').innerHTML = '0';
 const validateSymbols = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
+const signs = ['-', '+', '*', '/', '.'];
+
 // Функции - ПРОВЕРКИ
 // =
 const writeEqual = function () {
     if (calcArr.length > 0) {
-        checkLastSign();
+        checkLastSignForEqual();
         calcStr = calcArr.join('');
         try {
-            if (calcArr.length === 0) {
-                equal = '0';
-            }
-            else {
-                equal = eval(calcStr);
-            }
+            calcArr.length === 0 ? equal = '0' : equal = eval(calcStr);
         }
-        catch (_a) {
+        catch (e) {
             getCorrectExpresion();
         }
         checkEqualLength();
@@ -31,29 +28,13 @@ const writeEqual = function () {
 // '+'
 const writeNumberPlus = function () {
     newChar = '+';
-    if (calcArr.length === 0 || calcArr[calcArr.length - 1] === '(') {
-        return;
-    }
-    else if (calcArr[calcArr.length - 1] === '-' ||
-        calcArr[calcArr.length - 1] === '+' ||
-        calcArr[calcArr.length - 1] === '*' ||
-        calcArr[calcArr.length - 1] === '/' ||
-        calcArr[calcArr.length - 1] === '.') {
-        calcArr.pop();
-        addNumberAndShow();
-    }
-    else {
-        addNumberAndShow();
-    }
+    checkLastTapSign();
 };
+
 // '-'
 const writeNumberMinus = function () {
     newChar = '-';
-    if (calcArr[calcArr.length - 1] === '-' ||
-        calcArr[calcArr.length - 1] === '+' ||
-        calcArr[calcArr.length - 1] === '*' ||
-        calcArr[calcArr.length - 1] === '/' ||
-        calcArr[calcArr.length - 1] === '.') {
+    if (signs.includes(calcArr[calcArr.length - 1])) {
         calcArr.pop();
         addNumberAndShow();
     }
@@ -64,38 +45,12 @@ const writeNumberMinus = function () {
 // '*'
 const writeNumberUmn = function () {
     newChar = '*';
-    if (calcArr.length == 0 || calcArr[calcArr.length - 1] == '(') {
-        return;
-    }
-    else if (calcArr[calcArr.length - 1] === '-' ||
-        calcArr[calcArr.length - 1] === '+' ||
-        calcArr[calcArr.length - 1] === '*' ||
-        calcArr[calcArr.length - 1] === '/' ||
-        calcArr[calcArr.length - 1] === '.') {
-        calcArr.pop();
-        addNumberAndShow();
-    }
-    else {
-        addNumberAndShow();
-    }
+    checkLastTapSign();
 };
 // '/'
 const writeNumberAx = function () {
     newChar = '/';
-    if (calcArr.length == 0 || calcArr[calcArr.length - 1] == '(') {
-        return;
-    }
-    else if (calcArr[calcArr.length - 1] === '-' ||
-        calcArr[calcArr.length - 1] === '+' ||
-        calcArr[calcArr.length - 1] === '*' ||
-        calcArr[calcArr.length - 1] === '/' ||
-        calcArr[calcArr.length - 1] === '.') {
-        calcArr.pop();
-        addNumberAndShow();
-    }
-    else {
-        addNumberAndShow();
-    }
+    checkLastTapSign();
 };
 // 'C'
 const calcBackspace = function () {
@@ -145,22 +100,15 @@ const writeNumberDot = function () {
     newChar = '.';
     if (calcArr.length === 0) {
         return;
-    }
-    else if (calcArr.includes('.')) {
-        checkDotsAndOperands();
-    }
-    else {
-        addNumberAndShow();
+    } else {
+        checkLastTapSign();
     }
 };
 // '('
 const writeBracketLeft = function () {
     newChar = '(';
     if (calcArr.length !== 0) {
-        if (calcArr[calcArr.length - 1] !== '+' &&
-            calcArr[calcArr.length - 1] !== '-' &&
-            calcArr[calcArr.length - 1] !== '*' &&
-            calcArr[calcArr.length - 1] !== '/') {
+        if (!signs.includes(calcArr[calcArr.length - 1])) {
             calcArr.push('*');
             addNumberAndShow();
         }
@@ -261,6 +209,7 @@ document.querySelector('.buttonsWrap').addEventListener('click', function () {
         writeEqual();
     }
 });
+
 // Действия
 const addNumberAndShow = function () {
     calcArr.push(newChar);
@@ -268,31 +217,43 @@ const addNumberAndShow = function () {
     document.querySelector('.topNumberArea').innerHTML = calcStr;
     changeFontSizeTopNumberPlate();
 };
+
 const getCorrectExpresion = function () {
     document.querySelector('.titleArea').innerHTML = 'ВВЕДИТЕ КОРРЕКТНОЕ ВЫРАЖЕНИЕ';
     cleanTitleArea();
 };
+
 const cleanTitleArea = function () {
     setTimeout(function letsClean() {
         document.querySelector('.titleArea').innerHTML = '';
     }, 3000);
 };
+
 // Проверки 
-const checkLastSign = function () {
-    if (calcArr[calcArr.length - 1] === '-' ||
-        calcArr[calcArr.length - 1] === '+' ||
-        calcArr[calcArr.length - 1] === '*' ||
-        calcArr[calcArr.length - 1] === '/' ||
-        calcArr[calcArr.length - 1] === '.' ||
-        calcArr[calcArr.length - 1] === '(') {
+const checkLastSignForEqual = function () {
+    if (signs.includes(calcArr[calcArr.length - 1]) || calcArr[calcArr.length - 1] === '(') {
         calcArr.pop();
-        checkLastSign();
+        checkLastSignForEqual();
     }
     else {
         calcStr = calcArr.join('');
         document.querySelector('.topNumberArea').innerHTML = calcStr;
     }
 };
+
+const checkLastTapSign = function () {
+    if (calcArr.length == 0 || calcArr[calcArr.length - 1] == '(') {
+        return;
+    }
+    else if (signs.includes(calcArr[calcArr.length - 1])) {
+        calcArr.pop();
+        addNumberAndShow();
+    }
+    else {
+        addNumberAndShow();
+    }
+}
+
 const checkEqualLength = function () {
     equal = String(equal);
     if (equal.length > 11) {
@@ -303,32 +264,7 @@ const checkEqualLength = function () {
         document.querySelector('.calcFinish').innerHTML = equal;
     }
 };
-const checkDotsAndOperands = function () {
-    let allDotsAndOperands = [];
-    for (let j of calcArr) {
-        if (j === '.' ||
-            j === '+' ||
-            j === '-' ||
-            j === '*' ||
-            j === '/') {
-            allDotsAndOperands.push(j);
-        }
-    }
-    if (allDotsAndOperands[allDotsAndOperands.length - 1] === '.' ||
-        calcArr[calcArr.length - 1] === '+' ||
-        calcArr[calcArr.length - 1] === '-' ||
-        calcArr[calcArr.length - 1] === '*' ||
-        calcArr[calcArr.length - 1] === '/') {
-        return;
-    }
-    else {
-        let newChar = document.querySelector('.but_dot').innerHTML;
-        calcArr.push(newChar);
-        calcStr = calcArr.join('');
-        document.querySelector('.topNumberArea').innerHTML = calcStr;
-        changeFontSizeTopNumberPlate();
-    }
-};
+
 const changeFontSizeTopNumberPlate = function () {
     const elem = document.querySelector('.topNumberArea');
     if (calcStr.length > 33) {
