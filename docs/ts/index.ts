@@ -8,13 +8,14 @@ let equal: string = '0';
 document.querySelector('.calcFinish')!.innerHTML = equal;
 document.querySelector('.topNumberArea')!.innerHTML = '0';
 const validateSymbols: string[] = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
+const validateSigns: string[] = ['+', '-', '*', '/'];
 
 // Функции - ПРОВЕРКИ
 
 // =
 const writeEqual = function (): void {
     if (calcArr.length > 0) {
-        checkLastSign();
+        checkLastSignBeforeEqual();
         calcStr = calcArr.join('');
         try {
             if (calcArr.length === 0) {
@@ -29,70 +30,32 @@ const writeEqual = function (): void {
     }
 }
 
-// '+'
-const writeNumberPlus = function (): void {
-    newChar = '+';
-    if (calcArr.length === 0 || calcArr[calcArr.length - 1] === '(') {
-        return
-    } else if (calcArr[calcArr.length - 1] === '-' ||
-        calcArr[calcArr.length - 1] === '+' ||
-        calcArr[calcArr.length - 1] === '*' ||
-        calcArr[calcArr.length - 1] === '/' ||
-        calcArr[calcArr.length - 1] === '.') {
-        calcArr.pop()
-        addNumberAndShow();
-    } else {
-        addNumberAndShow();
-    }
-}
-
 // '-'
 const writeNumberMinus = function (): void {
     newChar = '-';
-    if (calcArr[calcArr.length - 1] === '-' ||
-        calcArr[calcArr.length - 1] === '+' ||
-        calcArr[calcArr.length - 1] === '*' ||
-        calcArr[calcArr.length - 1] === '/' ||
-        calcArr[calcArr.length - 1] === '.') {
-        calcArr.pop()
-        addNumberAndShow();
-    } else {
-        addNumberAndShow();
-    }
+    (validateSigns.includes(calcArr[calcArr.length - 1]) || calcArr[calcArr.length - 1] === '.') && calcArr.pop();
+    // if (validateSigns.includes(calcArr[calcArr.length - 1]) || calcArr[calcArr.length - 1] === '.') {
+    //     calcArr.pop()
+    // }
+    addNumberAndShow();
+}
+
+// '+'
+const writeNumberPlus = function (): void {
+    newChar = '+';
+    checkLastSignForAddSign();
 }
 
 // '*'
 const writeNumberUmn = function (): void {
     newChar = '*';
-    if (calcArr.length == 0 || calcArr[calcArr.length - 1] == '(') {
-        return;
-    } else if (calcArr[calcArr.length - 1] === '-' ||
-        calcArr[calcArr.length - 1] === '+' ||
-        calcArr[calcArr.length - 1] === '*' ||
-        calcArr[calcArr.length - 1] === '/' ||
-        calcArr[calcArr.length - 1] === '.') {
-        calcArr.pop();
-        addNumberAndShow();
-    } else {
-        addNumberAndShow();
-    }
+    checkLastSignForAddSign();
 }
 
 // '/'
 const writeNumberAx = function (): void {
     newChar = '/';
-    if (calcArr.length == 0 || calcArr[calcArr.length - 1] == '(') {
-        return;
-    } else if (calcArr[calcArr.length - 1] === '-' ||
-        calcArr[calcArr.length - 1] === '+' ||
-        calcArr[calcArr.length - 1] === '*' ||
-        calcArr[calcArr.length - 1] === '/' ||
-        calcArr[calcArr.length - 1] === '.') {
-        calcArr.pop()
-        addNumberAndShow();
-    } else {
-        addNumberAndShow();
-    }
+    checkLastSignForAddSign();
 }
 
 // 'C'
@@ -101,9 +64,10 @@ const calcBackspace = function (): void {
     calcStr = calcArr.join('');
     document.querySelector('.topNumberArea')!.innerHTML = calcStr;
     changeFontSizeTopNumberPlate();
-    if (calcArr.length === 0) {
-        document.querySelector('.topNumberArea')!.innerHTML = '0';
-    }
+    (calcArr.length === 0) && (document.querySelector('.topNumberArea')!.innerHTML = '0');
+    // if (calcArr.length === 0) {
+    //     document.querySelector('.topNumberArea')!.innerHTML = '0';
+    // }
     changeFontSizeTopNumberPlate();
 }
 
@@ -157,19 +121,12 @@ const writeNumberDot = function (): void {
 // '('
 const writeBracketLeft = function (): void {
     newChar = '(';
-    if (calcArr.length !== 0) {
-        if (calcArr[calcArr.length - 1] !== '+' &&
-            calcArr[calcArr.length - 1] !== '-' &&
-            calcArr[calcArr.length - 1] !== '*' &&
-            calcArr[calcArr.length - 1] !== '/') {
-            calcArr.push('*');
-            addNumberAndShow();
-        } else {
-            addNumberAndShow();
-        }
-    } else {
-        addNumberAndShow();
-    }
+    (calcArr.length !== 0 && !validateSigns.includes(calcArr[calcArr.length - 1])) &&  calcArr.push('*');
+
+    // if (calcArr.length !== 0 && !validateSigns.includes(calcArr[calcArr.length - 1])) {
+    //     calcArr.push('*');
+    // }
+    addNumberAndShow();
 }
 
 // ')'
@@ -181,67 +138,95 @@ const writeBracketRight = function (): void {
 
 // События на КЛАВИАТУРУ
 document.addEventListener('keyup', function (): void {
-    newChar = event.key;
-    if (validateSymbols.includes(newChar)) {
-        addNumberAndShow();
-    } else if (newChar === 'Backspace') {
-        calcBackspace();
-    } else if (newChar === 'Delete') {
-        calcCleanAll();
-    } else if (newChar === 'Enter') {
-        writeEqual();
-    } else if (newChar === '*') {
-        writeNumberUmn();
-    } else if (newChar === '+') {
-        writeNumberPlus();
-    } else if (newChar === '-') {
-        writeNumberMinus();
-    } else if (newChar === '/') {
-        writeNumberAx();
-    } else if (newChar === '.') {
-        writeNumberDot();
-    } else if (newChar === '(') {
-        writeBracketLeft();
-    } else if (newChar === ')') {
-        writeBracketRight();
-    }
+    newChar = event!.key;
+
+    validateSymbols.includes(newChar) && addNumberAndShow();
+    (newChar === 'Backspace') && calcBackspace();
+    (newChar === 'Delete') && calcCleanAll();
+    (newChar === 'Enter') && writeEqual();
+    (newChar === '*') && writeNumberUmn();
+    (newChar === '+') && writeNumberPlus();
+    (newChar === '-') && writeNumberMinus();
+    (newChar === '/') && writeNumberAx();
+    (newChar === '.') && writeNumberDot();
+    (newChar === '(') && writeBracketLeft();
+    (newChar === ')') && writeBracketRight();
+
+    // if (validateSymbols.includes(newChar)) {
+    //     addNumberAndShow();
+    // } else if (newChar === 'Backspace') {
+    //     calcBackspace();
+    // } else if (newChar === 'Delete') {
+    //     calcCleanAll();
+    // } else if (newChar === 'Enter') {
+    //     writeEqual();
+    // } else if (newChar === '*') {
+    //     writeNumberUmn();
+    // } else if (newChar === '+') {
+    //     writeNumberPlus();
+    // } else if (newChar === '-') {
+    //     writeNumberMinus();
+    // } else if (newChar === '/') {
+    //     writeNumberAx();
+    // } else if (newChar === '.') {
+    //     writeNumberDot();
+    // } else if (newChar === '(') {
+    //     writeBracketLeft();
+    // } else if (newChar === ')') {
+    //     writeBracketRight();
+    // }
 })
 
 
 //События на МЫШЬ
 document.querySelector('.buttonsWrap')!.addEventListener('click', function (): void {
-    newChar = event.target.textContent;
+    newChar = event!.target!.textContent;
 
-    if (validateSymbols.includes(newChar)) {
-        addNumberAndShow();
-    } else if (newChar === '+') {
-        writeNumberPlus();
-    } else if (newChar === '-') {
-        writeNumberMinus();
-    } else if (newChar === '/') {
-        writeNumberAx();
-    } else if (newChar === 'x') {
-        newChar = '*';
-        writeNumberUmn();
-    } else if (newChar === 'M+') {
-        memoryPlus();
-    } else if (newChar === 'M-') {
-        memoryMinus();
-    } else if (newChar === 'MR') {
-        memoryExtract();
-    } else if (newChar === 'C') {
-        calcBackspace();
-    } else if (newChar === 'AC') {
-        calcCleanAll();
-    } else if (newChar === '(') {
-        writeBracketLeft();
-    } else if (newChar === ')') {
-        writeBracketRight();
-    } else if (newChar === '.') {
-        writeNumberDot();
-    } else if (newChar === '=') {
-        writeEqual();
-    }
+    validateSymbols.includes(newChar) && addNumberAndShow();
+    (newChar === '+') && writeNumberPlus();
+    (newChar === '-') && writeNumberMinus();
+    (newChar === '/') && writeNumberAx();
+    (newChar === 'x') && writeNumberUmn();
+    (newChar === 'M+') && memoryPlus();
+    (newChar === 'M-') && memoryMinus();
+    (newChar === 'MR') && memoryExtract();
+    (newChar === 'C') && calcBackspace();
+    (newChar === 'AC') && calcCleanAll();
+    (newChar === '(') && writeBracketLeft();
+    (newChar === ')') && writeBracketRight();
+    (newChar === '.') && writeNumberDot();
+    (newChar === '=') && writeEqual();
+
+    // if (validateSymbols.includes(newChar)) {
+    //     addNumberAndShow();
+    // } else if (newChar === '+') {
+    //     writeNumberPlus();
+    // } else if (newChar === '-') {
+    //     writeNumberMinus();
+    // } else if (newChar === '/') {
+    //     writeNumberAx();
+    // } else if (newChar === 'x') {
+    //     // newChar = '*';
+    //     writeNumberUmn();
+    // } else if (newChar === 'M+') {
+    //     memoryPlus();
+    // } else if (newChar === 'M-') {
+    //     memoryMinus();
+    // } else if (newChar === 'MR') {
+    //     memoryExtract();
+    // } else if (newChar === 'C') {
+    //     calcBackspace();
+    // } else if (newChar === 'AC') {
+    //     calcCleanAll();
+    // } else if (newChar === '(') {
+    //     writeBracketLeft();
+    // } else if (newChar === ')') {
+    //     writeBracketRight();
+    // } else if (newChar === '.') {
+    //     writeNumberDot();
+    // } else if (newChar === '=') {
+    //     writeEqual();
+    // }
 })
 
 
@@ -266,21 +251,28 @@ const cleanTitleArea = function (): void {
 
 
 // Проверки 
-const checkLastSign = function (): void {
-    if (calcArr[calcArr.length - 1] === '-' ||
-        calcArr[calcArr.length - 1] === '+' ||
-        calcArr[calcArr.length - 1] === '*' ||
-        calcArr[calcArr.length - 1] === '/' ||
-        calcArr[calcArr.length - 1] === '.' ||
-        calcArr[calcArr.length - 1] === '(') {
+const checkLastSignBeforeEqual = function (): void {
+    if (validateSigns.includes(calcArr[calcArr.length - 1]) ||
+        calcArr[calcArr.length - 1] === '(' ||
+        calcArr[calcArr.length - 1] === '.') {
         calcArr.pop()
-        checkLastSign();
+        checkLastSignBeforeEqual();
     } else {
         calcStr = calcArr.join('');
         document.querySelector('.topNumberArea')!.innerHTML = calcStr;
     }
 }
 
+const checkLastSignForAddSign = () => {
+    if (calcArr.length == 0 || calcArr[calcArr.length - 1] == '(') {
+        return;
+    } else if (validateSigns.includes(calcArr[calcArr.length - 1]) || calcArr[calcArr.length - 1] === '.') {
+        calcArr.pop()
+        addNumberAndShow();
+    } else {
+        addNumberAndShow();
+    }
+}
 
 const checkEqualLength = function (): void {
     equal = String(equal);
@@ -296,13 +288,11 @@ const checkEqualLength = function (): void {
 const checkDotsAndOperands = function (): void {
     let allDotsAndOperands: string[] = [];
     for (let j of calcArr) {
-        if (j === '.' ||
-            j === '+' ||
-            j === '-' ||
-            j === '*' ||
-            j === '/') {
-            allDotsAndOperands.push(j);
-        }
+        // if (validateSigns.includes(j)  || j === '.') {
+        //     allDotsAndOperands.push(j);
+        // }
+        (validateSigns.includes(j)  || j === '.') && allDotsAndOperands.push(j);
+        console.log(allDotsAndOperands)
     }
     if (allDotsAndOperands[allDotsAndOperands.length - 1] === '.' ||
         calcArr[calcArr.length - 1] === '+' ||
@@ -322,23 +312,34 @@ const checkDotsAndOperands = function (): void {
 const changeFontSizeTopNumberPlate = function (): void {
     const elem: any = document.querySelector('.topNumberArea');
 
-    if (calcStr.length > 33) {
-        elem.style.fontSize = '15px';
-    }
-    if (calcStr.length > 36) {
-        elem!.style.fontSize = '14px';
-    }
-    if (calcStr.length > 39) {
-        elem!.style.fontSize = '13px';
-    }
-    if (calcStr.length > 42) {
-        elem!.style.fontSize = '12px';
-    }
-    if (calcStr.length > 45) {
-        elem!.style.fontSize = '11px';
-    }
-    if (calcStr.length > 49) {
-        elem!.innerHTML = `<span style="font-size: 14px;">...</span>`;
-    }
-} 
+    // if (calcStr.length > 33) {
+    //     elem.style.fontSize = '15px';
+    // }
+    (calcStr.length > 33) && (elem.style.fontSize = '15px');
+
+    // if (calcStr.length > 36) {
+    //     elem!.style.fontSize = '14px';
+    // }
+    (calcStr.length > 36) && (elem.style.fontSize = '14px');
+
+    // if (calcStr.length > 39) {
+    //     elem!.style.fontSize = '13px';
+    // }
+    (calcStr.length > 39) && (elem.style.fontSize = '13px');
+
+    // if (calcStr.length > 42) {
+    //     elem!.style.fontSize = '12px';
+    // }
+    (calcStr.length > 42) && (elem.style.fontSize = '12px');
+
+    // if (calcStr.length > 45) {
+    //     elem!.style.fontSize = '11px';
+    // }
+    (calcStr.length > 45) && (elem.style.fontSize = '11px');
+
+    // if (calcStr.length > 49) {
+    //     elem!.innerHTML = `<span style="font-size: 14px;">...</span>`;
+    // }
+    (calcStr.length > 49) && (elem!.innerHTML = `<span style="font-size: 14px;">...</span>`);
+}
 
