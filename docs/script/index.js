@@ -33,9 +33,6 @@ const writeEqual = function () {
 const writeNumberMinus = function () {
     newChar = '-';
     (validateSigns.includes(calcArr[calcArr.length - 1]) || calcArr[calcArr.length - 1] === '.') && calcArr.pop();
-    // if (validateSigns.includes(calcArr[calcArr.length - 1]) || calcArr[calcArr.length - 1] === '.') {
-    //     calcArr.pop()
-    // }
     addNumberAndShow();
 };
 // '+'
@@ -60,9 +57,6 @@ const calcBackspace = function () {
     document.querySelector('.topNumberArea').innerHTML = calcStr;
     changeFontSizeTopNumberPlate();
     (calcArr.length === 0) && (document.querySelector('.topNumberArea').innerHTML = '0');
-    // if (calcArr.length === 0) {
-    //     document.querySelector('.topNumberArea')!.innerHTML = '0';
-    // }
     changeFontSizeTopNumberPlate();
 };
 // 'AC'
@@ -114,9 +108,6 @@ const writeNumberDot = function () {
 const writeBracketLeft = function () {
     newChar = '(';
     (calcArr.length !== 0 && !validateSigns.includes(calcArr[calcArr.length - 1])) && calcArr.push('*');
-    // if (calcArr.length !== 0 && !validateSigns.includes(calcArr[calcArr.length - 1])) {
-    //     calcArr.push('*');
-    // }
     addNumberAndShow();
 };
 // ')'
@@ -138,29 +129,6 @@ document.addEventListener('keyup', function () {
     (newChar === '.') && writeNumberDot();
     (newChar === '(') && writeBracketLeft();
     (newChar === ')') && writeBracketRight();
-    // if (validateSymbols.includes(newChar)) {
-    //     addNumberAndShow();
-    // } else if (newChar === 'Backspace') {
-    //     calcBackspace();
-    // } else if (newChar === 'Delete') {
-    //     calcCleanAll();
-    // } else if (newChar === 'Enter') {
-    //     writeEqual();
-    // } else if (newChar === '*') {
-    //     writeNumberUmn();
-    // } else if (newChar === '+') {
-    //     writeNumberPlus();
-    // } else if (newChar === '-') {
-    //     writeNumberMinus();
-    // } else if (newChar === '/') {
-    //     writeNumberAx();
-    // } else if (newChar === '.') {
-    //     writeNumberDot();
-    // } else if (newChar === '(') {
-    //     writeBracketLeft();
-    // } else if (newChar === ')') {
-    //     writeBracketRight();
-    // }
 });
 //События на МЫШЬ
 document.querySelector('.buttonsWrap').addEventListener('click', function () {
@@ -179,36 +147,6 @@ document.querySelector('.buttonsWrap').addEventListener('click', function () {
     (newChar === ')') && writeBracketRight();
     (newChar === '.') && writeNumberDot();
     (newChar === '=') && writeEqual();
-    // if (validateSymbols.includes(newChar)) {
-    //     addNumberAndShow();
-    // } else if (newChar === '+') {
-    //     writeNumberPlus();
-    // } else if (newChar === '-') {
-    //     writeNumberMinus();
-    // } else if (newChar === '/') {
-    //     writeNumberAx();
-    // } else if (newChar === 'x') {
-    //     // newChar = '*';
-    //     writeNumberUmn();
-    // } else if (newChar === 'M+') {
-    //     memoryPlus();
-    // } else if (newChar === 'M-') {
-    //     memoryMinus();
-    // } else if (newChar === 'MR') {
-    //     memoryExtract();
-    // } else if (newChar === 'C') {
-    //     calcBackspace();
-    // } else if (newChar === 'AC') {
-    //     calcCleanAll();
-    // } else if (newChar === '(') {
-    //     writeBracketLeft();
-    // } else if (newChar === ')') {
-    //     writeBracketRight();
-    // } else if (newChar === '.') {
-    //     writeNumberDot();
-    // } else if (newChar === '=') {
-    //     writeEqual();
-    // }
 });
 // Действия
 const addNumberAndShow = function () {
@@ -264,11 +202,7 @@ const checkEqualLength = function () {
 const checkDotsAndOperands = function () {
     let allDotsAndOperands = [];
     for (let j of calcArr) {
-        // if (validateSigns.includes(j)  || j === '.') {
-        //     allDotsAndOperands.push(j);
-        // }
         (validateSigns.includes(j) || j === '.') && allDotsAndOperands.push(j);
-        console.log(allDotsAndOperands);
     }
     if (allDotsAndOperands[allDotsAndOperands.length - 1] === '.' ||
         calcArr[calcArr.length - 1] === '+' ||
@@ -287,28 +221,10 @@ const checkDotsAndOperands = function () {
 };
 const changeFontSizeTopNumberPlate = function () {
     const elem = document.querySelector('.topNumberArea');
-    // if (calcStr.length > 33) {
-    //     elem.style.fontSize = '15px';
-    // }
     (calcStr.length > 33) && (elem.style.fontSize = '15px');
-    // if (calcStr.length > 36) {
-    //     elem!.style.fontSize = '14px';
-    // }
     (calcStr.length > 36) && (elem.style.fontSize = '14px');
-    // if (calcStr.length > 39) {
-    //     elem!.style.fontSize = '13px';
-    // }
     (calcStr.length > 39) && (elem.style.fontSize = '13px');
-    // if (calcStr.length > 42) {
-    //     elem!.style.fontSize = '12px';
-    // }
     (calcStr.length > 42) && (elem.style.fontSize = '12px');
-    // if (calcStr.length > 45) {
-    //     elem!.style.fontSize = '11px';
-    // }
     (calcStr.length > 45) && (elem.style.fontSize = '11px');
-    // if (calcStr.length > 49) {
-    //     elem!.innerHTML = `<span style="font-size: 14px;">...</span>`;
-    // }
     (calcStr.length > 49) && (elem.innerHTML = `<span style="font-size: 14px;">...</span>`);
 };
