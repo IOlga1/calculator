@@ -70,7 +70,7 @@ const calcBackspace = function (): void {
     // }
     changeFontSizeTopNumberPlate();
 }
-
+ 
 // 'AC'
 const calcCleanAll = function (): void {
     calcArr = [];
